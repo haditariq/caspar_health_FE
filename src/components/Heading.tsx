@@ -4,7 +4,7 @@ import React, { FC } from 'react';
 type HeadingProps = {
   text: string;
   size: OptionalString;
-  color: OptionalString;
+  color?: OptionalString;
   extraStyle?: string;
 };
 

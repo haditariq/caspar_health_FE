@@ -27,7 +27,7 @@ const InputField: FC<InputFieldProps> = ({
         className='fill-slate-100 mr-2'
       />
       <input
-        className={`p-1.5 outline-none w-full`}
+        className={`outline-none w-full`}
         placeholder={placeholder}
         onChange={onChange}
         name='chamalako'

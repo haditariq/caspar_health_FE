@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={inter.className}>
+      <body className={inter.className } suppressHydrationWarning={true}>
         <div
           style={{ height: '100vh', display: 'flex', backgroundColor: '#fff' }}
         >

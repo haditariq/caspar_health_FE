@@ -13,7 +13,7 @@ type HeaderProps = {
 
 const Header: FC<HeaderProps> = ({ title, canGoBack, textColor, textSize }) => {
   return (
-    <div className='flex flex-row h-16 items-center bg-primary px-5 mb-3'>
+    <div className='flex flex-row h-16 items-center p-2 mb-4 border-b-2 border-light_border'>
       {canGoBack && (
         <button onClick={canGoBack}>
           <Image src={Icons.goBack} alt='backArrow' height={40} width={40} />

@@ -32,7 +32,7 @@ const Button: FC<ButtonProps> = ({
   return (
     <button
       className={`${bgcolor} ${extraStyle} flex flex-row justify-center items-center ${
-        disabled && 'opacity-60 bg-black cursor-not-allowed'
+        disabled && ' bg-black cursor-not-allowed'
       }`}
       onClick={onClick}
       disabled={disabled}

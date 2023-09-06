@@ -23,7 +23,7 @@ const SelectOptionList: FC<SelectOptionListProps> = ({
         onChange={(e) => onSelectOption(e)}
         value={value}
       >
-        <option selected>Choose a {heading}</option>
+        <option >Choose a {heading}</option>
         {list.map((item: string, idx: number) => {
           const key = itemid + idx;
           return (
