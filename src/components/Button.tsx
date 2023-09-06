@@ -14,6 +14,7 @@ type ButtonProps = {
   loading?: boolean;
   loaderSize?: loadSizeProps;
   loaderColor?: string;
+  disabled?: boolean;
 };
 
 const Button: FC<ButtonProps> = ({
@@ -26,26 +27,25 @@ const Button: FC<ButtonProps> = ({
   loading,
   loaderSize,
   loaderColor,
+  disabled,
 }) => {
   return (
     <button
-      className={`m-4 p-4 ${bgcolor} ${extraStyle} flex flex-row justify-center items-center`}
+      className={`${bgcolor} ${extraStyle} flex flex-row justify-center items-center ${
+        disabled && 'opacity-60 bg-black cursor-not-allowed'
+      }`}
       onClick={onClick}
+      disabled={disabled}
     >
-      <Heading
-        text={text}
-        size={textSize}
-        color={textColor}
-        extraStyle='mx-2'
-      />
+      <Heading text={text} size={textSize} color={textColor} />
 
-        <RotatingLines
-          strokeColor={loaderColor}
-          strokeWidth='5'
-          animationDuration='0.75'
-          width={loaderSize}
-          visible={loading}
-        />
+      <RotatingLines
+        strokeColor={loaderColor}
+        strokeWidth='5'
+        animationDuration='0.75'
+        width={loaderSize}
+        visible={loading}
+      />
     </button>
   );
 };

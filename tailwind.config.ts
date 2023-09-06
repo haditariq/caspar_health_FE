@@ -38,7 +38,9 @@ const config: Config = {
       secondry: "#5087FF",
       white: "#ffffff",
       black: "#000000",
-      light_border: "rgba(0,0,0,.06)"
+      light_border: "rgba(0,0,0,.06)",
+      warning: 'red',
+      'warning-500': 'rgb(255, 0, 0, .8)'
     },
     fontSize: {
       sm: '0.8rem',

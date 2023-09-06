@@ -1,18 +1,21 @@
 import Icons from '@/assets';
 import Image from 'next/image';
-import React, { ChangeEvent, FC } from 'react';
-import Button from './Button';
+import React, { ChangeEvent, FC, ReactNode } from 'react';
 
 type InputFieldProps = {
   placeholder: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   extraStyle: string;
+  children: ReactNode;
+  value: string;
 };
 
 const InputField: FC<InputFieldProps> = ({
   placeholder,
   onChange,
   extraStyle,
+  children,
+  value,
 }) => {
   return (
     <div className={`${extraStyle} flex flex-row h-10 items-center px-2`}>
@@ -28,16 +31,9 @@ const InputField: FC<InputFieldProps> = ({
         placeholder={placeholder}
         onChange={onChange}
         name='chamalako'
+        value={value}
       />
-      <Button
-        text='Go'
-        textSize='text-lg'
-        loading={false}
-        extraStyle='bg-primary px-5 py-5 m-0 h-full rounded-r-md -mr-3'
-        textColor='text-white'
-        onClick={() => alert('Search Results')}
-        bgcolor='bg-primary'
-      />
+      {children}
     </div>
   );
 };

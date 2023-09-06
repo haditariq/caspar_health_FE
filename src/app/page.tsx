@@ -17,7 +17,7 @@ export default function Home() {
   };
 
   return (
-    <main className='flex flex-col min-h-screen items-center justify-center bg-secondry text-white '>
+    <main className='flex flex-1 flex-col min-h-screen items-center justify-center bg-secondry text-white '>
       <Heading
         text='Please click to proceed to Caspar health Patients Feed.'
         size='text-xl'
