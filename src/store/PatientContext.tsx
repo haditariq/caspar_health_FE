@@ -9,6 +9,7 @@ import React, {
 } from 'react';
 import PatientList from '@/data/mock_data.json';
 import { PatientProps } from '@/types/Patient';
+import PatientSearchAlgo from '@/utils/patientSearching';
 
 export interface PatientContextType {
   deletePatient: (e: number) => void;
@@ -16,12 +17,12 @@ export interface PatientContextType {
   patients: PatientProps[];
 }
 
-type SearchPatientProps = {
+export interface SearchPatientProps {
   query?: string;
   gender?: string;
   ageRange?: string;
   sortAscending?: boolean;
-};
+}
 
 const PatientContext = createContext<PatientContextType | undefined>(undefined);
 
@@ -44,13 +45,7 @@ const PatientContextProvider: React.FC<{ children: ReactNode }> = ({
     ageRange,
     sortAscending,
   }: SearchPatientProps) => {
-    console.log('searchThroughPatients actions!!!!!', {
-      query,
-      gender,
-      ageRange,
-      sortAscending,
-    });
-    // setPatients([...patients.slice(0, 200)]);
+    PatientSearchAlgo({ patients, query, gender, ageRange, sortAscending });
   };
 
   const value: PatientContextType = {
