@@ -21,6 +21,7 @@ const Page = () => {
   // context properties
   const patients = usePatientContext()?.patients;
   const searchThroughPatients = usePatientContext()?.searchThroughPatients;
+  const patientsSize = usePatientContext()?.patientsSize;
   // const deletePatient = usePatientContext()?.deletePatient;
 
   // reset state
@@ -43,15 +44,13 @@ const Page = () => {
 
   // search 'query' debounce
   useEffect(() => {
-    if (query.length) {
-      const timeoutId = setTimeout(() => {
-        searchPatients();
-      }, 5000);
-      return () => clearTimeout(timeoutId);
-    }
+    const timeoutId = setTimeout(() => {
+      searchPatients();
+    }, 500);
+    return () => clearTimeout(timeoutId);
   }, [query]);
 
-  // when 'ageRange, gender, sortAscending' effects
+  // when 'ag5eRange, gender, sortAscending' effects
   useEffect(() => {
     searchPatients();
   }, [ageRange, gender, sortAscending]);
@@ -100,34 +99,32 @@ const Page = () => {
           ageRange={ageRange}
         />
 
-        {patients?.length != patients?.length && (
-          <div className='flex w-full flex-1 items-end justify-end my-1'>
-            <Heading
-              text={`Results found`}
-              size='text-sm'
-              color='light_border'
-              extraStyle='mx-1'
-            />
-            <Heading
-              text={`${patients?.length}`}
-              size='text-sm'
-              color='light_border'
-              extraStyle='font-medium'
-            />
-            <Heading
-              text={`of`}
-              size='text-sm'
-              color='light_border'
-              extraStyle='mx-1'
-            />
-            <Heading
-              text={` ${patients?.length}`}
-              size='text-sm'
-              color='light_border'
-              extraStyle='font-medium'
-            />
-          </div>
-        )}
+        <div className='flex w-full flex-1 items-end justify-end my-1'>
+          <Heading
+            text={`Results found`}
+            size='text-sm'
+            color='light_border'
+            extraStyle='mx-1'
+          />
+          <Heading
+            text={`${patients?.length}`}
+            size='text-sm'
+            color='light_border'
+            extraStyle='font-medium'
+          />
+          <Heading
+            text={`of`}
+            size='text-sm'
+            color='light_border'
+            extraStyle='mx-1'
+          />
+          <Heading
+            text={`${patientsSize}`}
+            size='text-sm'
+            color='light_border'
+            extraStyle='font-medium'
+          />
+        </div>
       </div>
 
       <div className='flex-1 mt-3 p-2 bg-white'>

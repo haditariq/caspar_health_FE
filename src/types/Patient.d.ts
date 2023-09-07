@@ -6,4 +6,5 @@ export type PatientProps = {
   gender: 'Male' | 'Female';
   age: number;
   avatar: string;
+  ageGroup?: string
 };
