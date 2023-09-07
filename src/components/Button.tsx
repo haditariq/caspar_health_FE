@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { RotatingLines } from 'react-loader-spinner';
 import Heading from './Heading';
+import Spinner from './Spinner';
 
 type loadSizeProps = string | undefined;
 
@@ -12,8 +13,6 @@ type ButtonProps = {
   extraStyle?: string;
   bgcolor: string;
   loading?: boolean;
-  loaderSize?: loadSizeProps;
-  loaderColor?: string;
   disabled?: boolean;
 };
 
@@ -25,8 +24,6 @@ const Button: FC<ButtonProps> = ({
   extraStyle,
   bgcolor,
   loading,
-  loaderSize,
-  loaderColor,
   disabled,
 }) => {
   return (
@@ -39,13 +36,7 @@ const Button: FC<ButtonProps> = ({
     >
       <Heading text={text} size={textSize} color={textColor} />
 
-      <RotatingLines
-        strokeColor={loaderColor}
-        strokeWidth='5'
-        animationDuration='0.75'
-        width={loaderSize}
-        visible={loading}
-      />
+      {loading && <Spinner bg='text-white' spinnerColor='fill-primary' />}
     </button>
   );
 };

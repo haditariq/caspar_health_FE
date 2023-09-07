@@ -27,7 +27,7 @@ export default function Home() {
         text='Patients Feed'
         onClick={onClickToPatientFeed}
         bgcolor='bg-primary'
-        extraStyle='rounded-md w-72 item-center justify-center py-4'
+        extraStyle='rounded-md w-72 item-center justify-center py-4 mt-5'
         loading={loading}
         loaderSize={'20'}
         loaderColor={'#fff'}

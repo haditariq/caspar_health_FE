@@ -1,3 +1,4 @@
+import PatientContextProvider from '@/store/PatientContext';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -16,11 +17,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={inter.className } suppressHydrationWarning={true}>
+      <body className={inter.className} suppressHydrationWarning={true}>
         <div
           style={{ height: '100vh', display: 'flex', backgroundColor: '#fff' }}
         >
-          {children}
+          <PatientContextProvider>{children}</PatientContextProvider>
         </div>
       </body>
     </html>

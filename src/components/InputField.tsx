@@ -7,7 +7,7 @@ type InputFieldProps = {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   extraStyle: string;
   children: ReactNode;
-  value: string;
+  value?: string;
 };
 
 const InputField: FC<InputFieldProps> = ({

@@ -1,51 +1,66 @@
-import React, { ReactNode, createContext, useContext, useState } from 'react';
+'use client';
 
-interface PatientContextType {
-  removeContext: () => void;
+import React, {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import PatientList from '@/data/mock_data.json';
+import { PatientProps } from '@/types/Patient';
+
+export interface PatientContextType {
+  deletePatient: (e: number) => void;
+  searchThroughPatients: (obj: any) => void;
+  patients: PatientProps[];
 }
+
+type SearchPatientProps = {
+  query?: string;
+  gender?: string;
+  ageRange?: string;
+  sortAscending?: boolean;
+};
 
 const PatientContext = createContext<PatientContextType | undefined>(undefined);
 
-// Create a provider component
 const PatientContextProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [data, setData] = useState<any | undefined>(undefined);
+  const [patients, setPatients] = useState<PatientProps[] | []>([]);
 
-  const saveContext = (input: any): void => {
-    const temp: any | undefined = { ...input, type: 'Host' };
-    setData(temp);
+  useEffect(() => {
+    setPatients(PatientList as PatientProps[]);
+  }, []);
+
+  const deletePatient = (idx: number) => {
+    console.log(patients, idx);
   };
 
-  const removeContext = () => {
-    setData(undefined);
+  const searchThroughPatients = ({
+    query,
+    gender,
+    ageRange,
+    sortAscending,
+  }: SearchPatientProps) => {
+    console.log('searchThroughPatients actions!!!!!', {
+      query,
+      gender,
+      ageRange,
+      sortAscending,
+    });
+    // setPatients([...patients.slice(0, 200)]);
   };
 
-  const toggleUserType = () => {
-    const newType: any = data?.type === 'Host' ? 'Guest' : 'Host';
-    const d = { ...data, type: newType };
-
-    // @ts-ignore
-    setData(d);
-  };
-
-  const changeuserType = (type: any) => {
-    const d = { ...data, type };
-
-    // @ts-ignore
-    setData(d);
-  };
-
-  // The value object contains the data and functions you want to share
-  // eslint-disable-next-line react/jsx-no-constructed-context-values
   const value: PatientContextType = {
-    removeContext,
+    deletePatient,
+    searchThroughPatients,
+    patients,
   };
 
   return (
-    <PatientContext.Provider value={value}>
-      {children}
-    </PatientContext.Provider>
+    <PatientContext.Provider value={value}>{children}</PatientContext.Provider>
   );
 };
 
