@@ -21,6 +21,10 @@ const PatientSearchAlgo = ({ patients, query, gender, ageRange, sortAscending }:
   return data
 }
 
+export const PatientById = (patientList: PatientProps[], id: number): PatientProps[] => {
+  return patientList.filter((item: PatientProps) => item?.patient_id == parseInt(id))
+}
+
 const genderCheck = (patientGender: string, gender: string): boolean => {
   if (!gender?.length) return true;
   return patientGender.toLowerCase() == gender ? true : false

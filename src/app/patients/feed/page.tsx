@@ -22,7 +22,6 @@ const Page = () => {
   const patients = usePatientContext()?.patients;
   const searchThroughPatients = usePatientContext()?.searchThroughPatients;
   const patientsSize = usePatientContext()?.patientsSize;
-  // const deletePatient = usePatientContext()?.deletePatient;
 
   // reset state
   const resetState = useMemo(() => {

@@ -44,7 +44,7 @@ const PatientItem: FC<PatientItemProps> = ({
         <Heading text={`Age: ${age}`} size='text-sm' />
       </div>
 
-      <Link href={`/patients/details/${1}`}>
+      <Link href={`/patients/details/${patient_id}`}>
         <Image
           src={Icons.link}
           height={20}
