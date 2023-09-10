@@ -3,6 +3,7 @@ import Button from '@/components/Button';
 import Header from '@/components/Header';
 import Heading from '@/components/Heading';
 import ImageContainer from '@/components/ImageContainer';
+import ModalPopup from '@/components/ModalPopup';
 import { usePatientContext } from '@/store/PatientContext';
 import { useRouter } from 'next/navigation';
 import React, { FC, useState } from 'react';
@@ -19,7 +20,7 @@ const Page: FC<any> = ({ params }) => {
   const deletePatient = () => {
     setLoading(!loading);
     setTimeout(() => {
-      if (deletePatientById) deletePatientById(id);
+      if (deletePatientById) deletePatientById(parseInt(id));
       setLoading(false);
     }, 2000);
   };
@@ -78,6 +79,7 @@ const Page: FC<any> = ({ params }) => {
           loading={loading}
         />
       </div>
+      <ModalPopup/>
     </div>
   );
 };

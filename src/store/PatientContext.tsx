@@ -61,8 +61,7 @@ const PatientContextProvider: React.FC<{ children: ReactNode }> = ({
 
   const deletePatientById = (e: number) => {
     const list = [...deletedPatients];
-    list.push(e);
-    setDeletedPatients([...list]);
+    setDeletedPatients([...list, e]);
   };
 
   const searchThroughPatients = ({
@@ -91,8 +90,6 @@ const PatientContextProvider: React.FC<{ children: ReactNode }> = ({
     deletedPatients,
     deletePatientById,
   };
-
-  console.log(deletedPatients)
 
   return (
     <PatientContext.Provider value={value}>{children}</PatientContext.Provider>

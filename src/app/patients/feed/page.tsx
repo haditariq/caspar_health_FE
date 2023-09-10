@@ -31,6 +31,7 @@ const Page = () => {
   const searchThroughPatients = usePatientContext()?.searchThroughPatients;
   const patientsSize = usePatientContext()?.patientsSize;
   const setQueryParams = usePatientContext()?.setQueryParams;
+  const deletedPatients = usePatientContext()?.deletedPatients;
 
   // reset state
   const resetState = useMemo(() => {
@@ -163,6 +164,7 @@ const Page = () => {
             avatar,
             patient_id,
           } = item;
+          if (deletedPatients?.indexOf(patient_id) != -1) return null;
           return (
             <PatientItem
               key={id}
