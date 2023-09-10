@@ -4,32 +4,41 @@ import AdvanceSearch from '@/components/AdvanceSearch';
 import Button from '@/components/Button';
 import Header from '@/components/Header';
 import InputField from '@/components/InputField';
-import { SortingOptions } from '@/types/common';
+import { OptionalString, SortingOptions } from '@/types/common';
 import React, { useEffect, useId, useMemo, useState } from 'react';
 import PatientItem from '@/components/PatientItem';
 import Heading from '@/components/Heading';
-import { usePatientContext } from '@/store/PatientContext';
+import {
+  SearchQueryParamsType,
+  usePatientContext,
+} from '@/store/PatientContext';
 import { PatientProps } from '@/types/Patient';
 
 const Page = () => {
-  const [sortAscending, setSortAscending] = useState<SortingOptions>(undefined);
-  const [query, setQuery] = useState<string>('');
-  const [gender, setGender] = useState<string>('');
-  const [ageRange, setAgeRange] = useState<string>('');
   const patientid = useId();
+  const queryParams = usePatientContext()?.queryParams;
+  const [sortAscending, setSortAscending] = useState<SortingOptions>(
+    queryParams?.sortOrder
+  );
+  const [query, setQuery] = useState<OptionalString>(queryParams?.query);
+  const [gender, setGender] = useState<OptionalString>(queryParams?.gender);
+  const [ageRange, setAgeRange] = useState<OptionalString>(
+    queryParams?.ageRange
+  );
 
   // context properties
   const patients = usePatientContext()?.patients;
   const searchThroughPatients = usePatientContext()?.searchThroughPatients;
   const patientsSize = usePatientContext()?.patientsSize;
+  const setQueryParams = usePatientContext()?.setQueryParams;
 
   // reset state
   const resetState = useMemo(() => {
     const decision =
-      query.length == 0 &&
+      query?.length == 0 &&
       sortAscending == undefined &&
-      !gender.length &&
-      !ageRange.length;
+      !gender?.length &&
+      !ageRange?.length;
     return decision;
   }, [query, ageRange, gender, sortAscending]);
 
@@ -44,14 +53,30 @@ const Page = () => {
   // search 'query' debounce
   useEffect(() => {
     const timeoutId = setTimeout(() => {
+      if (setQueryParams) {
+        const q = {
+          ...queryParams,
+          query: query,
+        };
+        setQueryParams(q as SearchQueryParamsType);
+      }
       searchPatients();
     }, 500);
     return () => clearTimeout(timeoutId);
   }, [query]);
 
-  // when 'ag5eRange, gender, sortAscending' effects
+  // when 'ageRange, gender, sortAscending' effects
   useEffect(() => {
     searchPatients();
+    if (setQueryParams) {
+      const q = {
+        query: query,
+        ageRange,
+        gender,
+        sortOrder: sortAscending,
+      };
+      setQueryParams(q as SearchQueryParamsType);
+    }
   }, [ageRange, gender, sortAscending]);
 
   // call filter api
@@ -94,8 +119,8 @@ const Page = () => {
           onClickSort={(status: SortingOptions) => setSortAscending(status)}
           onSetAgeRange={(e: string) => setAgeRange(e)}
           onSetGender={(e: string) => setGender(e)}
-          gender={gender}
-          ageRange={ageRange}
+          gender={gender as string}
+          ageRange={ageRange as string}
         />
 
         <div className='flex w-full flex-1 items-end justify-end my-1'>

@@ -10,21 +10,32 @@ import React, {
 import PatientList from '@/data/mock_data.json';
 import { PatientProps } from '@/types/Patient';
 import PatientSearchAlgo, { PatientById } from '@/utils/patientSearching';
+import { SortingOptions } from '@/types/common';
 
 export interface PatientContextType {
-  deletePatient: (e: number) => void;
-  searchThroughPatients: (obj: any) => void;
+  searchThroughPatients: (obj: SearchPatientProps) => void;
   fetchPatientById: (patient_id: number) => PatientProps;
   patients: PatientProps[] | [];
   patientsSize: number;
+  queryParams: SearchQueryParamsType;
+  setQueryParams: (obj: SearchQueryParamsType) => void;
+  deletedPatients: number[];
+  deletePatientById: (e: number) => void;
 }
 
 export interface SearchPatientProps {
   query?: string;
   gender?: string;
   ageRange?: string;
-  sortAscending?: boolean;
+  sortAscending?: 'asc' | 'dec' | undefined;
 }
+
+export type SearchQueryParamsType = {
+  sortOrder: SortingOptions;
+  query: string;
+  gender: string;
+  ageRange: string;
+};
 
 const PatientContext = createContext<PatientContextType | undefined>(undefined);
 
@@ -32,17 +43,26 @@ const PatientContextProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [patients, setPatients] = useState<PatientProps[] | []>([]);
+  const [deletedPatients, setDeletedPatients] = useState<number[] | []>([]);
+  const [queryParams, setQueryParams] = useState<SearchQueryParamsType>({
+    sortOrder: undefined,
+    query: '',
+    gender: '',
+    ageRange: '',
+  });
 
   useEffect(() => {
     setPatients(PatientList as PatientProps[]);
   }, []);
 
-  const deletePatient = (idx: number) => {
-    console.log(patients, idx);
+  const fetchPatientById = (patient_id: number) => {
+    return PatientById(PatientList as PatientProps[], patient_id);
   };
 
-  const fetchPatientById = (id: number) => {
-    return PatientById(PatientList as PatientProps[], id);
+  const deletePatientById = (e: number) => {
+    const list = [...deletedPatients];
+    list.push(e);
+    setDeletedPatients([...list]);
   };
 
   const searchThroughPatients = ({
@@ -62,12 +82,17 @@ const PatientContextProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const value: PatientContextType = {
-    deletePatient,
     searchThroughPatients,
     patients,
     patientsSize: PatientList.length,
     fetchPatientById,
+    queryParams,
+    setQueryParams,
+    deletedPatients,
+    deletePatientById,
   };
+
+  console.log(deletedPatients)
 
   return (
     <PatientContext.Provider value={value}>{children}</PatientContext.Provider>

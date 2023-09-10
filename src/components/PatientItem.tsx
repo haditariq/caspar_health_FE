@@ -3,6 +3,7 @@ import Heading from './Heading';
 import Image from 'next/image';
 import Icons from '@/assets';
 import Link from 'next/link';
+import ImageContainer from './ImageContainer';
 
 type PatientItemProps = {
   patient_id: number;
@@ -25,12 +26,12 @@ const PatientItem: FC<PatientItemProps> = ({
 }) => {
   return (
     <div className='p-4 flex-1 flex w-full items-center border-b-2 border-light_border'>
-      <Image
+      <ImageContainer
         height={20}
         width={20}
         src={avatar}
         alt='avatar'
-        className='object-fill h-20 w-20 rounded-full mx-5'
+        extraStyle='object-fill h-20 w-20 rounded-full mx-5'
       />
 
       <div className=' flex-1'>
@@ -45,11 +46,11 @@ const PatientItem: FC<PatientItemProps> = ({
       </div>
 
       <Link href={`/patients/details/${patient_id}`}>
-        <Image
+        <ImageContainer
           src={Icons.link}
           height={20}
           width={20}
-          className='object-contain mx-5'
+          extraStyle='object-contain mx-5'
           alt='Link'
         />
       </Link>
