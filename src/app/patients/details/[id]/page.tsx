@@ -25,6 +25,7 @@ const Page: FC<any> = ({ params }) => {
       if (deletePatientById) deletePatientById(parseInt(id));
       setLoading(false);
       setDeleteModalShow(false);
+      router.back();
     }, 2000);
   };
 
@@ -85,13 +86,9 @@ const Page: FC<any> = ({ params }) => {
       {deleteModalShow && (
         <ModalPopup containerStyle='w-2/6 m-auto left-0 right-0'>
           <DeletePatientModalContent
-            title={`Are you sure you want to delete patient with ID: ${
-              fetchById?.patient_id
-            }, Name: ${
-              fetchById && fetchById?.first_name + fetchById?.last_name
-            }`}
-            option1={'Yes'}
-            option2={'No'}
+            title={`Are you sure you want to delete ${fetchById?.patient_id}`}
+            option1={'Delete'}
+            option2={'Cancel'}
             onClickOption1={deletePatient}
             onClickOption2={() => setDeleteModalShow(false)}
             loading1={loading}

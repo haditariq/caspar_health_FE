@@ -172,14 +172,15 @@ const Page = () => {
               key={id}
               firstName={first_name}
               lastName={last_name}
-              email={email}
-              gender={gender}
-              age={age}
-              avatar={avatar}
               patient_id={patient_id}
             />
           );
         })}
+        {patients?.length == 0 && (
+          <div className='flex items-center justify-center mt-10'>
+            <Heading text='No results found.' color='text-black' size='lg' />
+          </div>
+        )}
       </div>
     </div>
   );
