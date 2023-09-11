@@ -38,7 +38,7 @@ const Page = () => {
       <div className='flex flex-row p-4'>
         <div className='flex flex-1'>
           <ImageContainer
-            src={fetchById?.avatar as string}
+            src={fetchById?.avatar}
             height={80}
             width={80}
             extraStyle='object-fill h-20 w-20 rounded-full mx-5'

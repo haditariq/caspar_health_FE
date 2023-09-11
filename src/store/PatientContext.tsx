@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 
 import React, {
@@ -13,7 +14,7 @@ import PatientSearchAlgo, { PatientById } from '@/utils/patientSearching';
 import { SortingOptions } from '@/types/common';
 
 export const initialStateQuery = {
-  sortOrder: undefined,
+  sortAscending: undefined,
   query: '',
   gender: '',
   ageRange: '',
@@ -24,39 +25,43 @@ export interface PatientContextType {
   fetchPatientById: (patient_id: number) => PatientProps;
   patients: PatientProps[] | [];
   patientsSize: number;
-  queryParams: SearchQueryParamsType;
-  setQueryParams: (obj: SearchQueryParamsType) => void;
+  queryParams: SearchPatientProps;
+  setQueryParams: (obj: SearchPatientProps) => void;
   deletedPatients: number[];
   deletePatientById: (e: number) => void;
+  resetSearchFilters: () => void;
+  hasFilter: boolean;
+  query: string;
+  setQuery: (e: string) => void;
 }
 
 export interface SearchPatientProps {
   query?: string;
   gender?: string;
   ageRange?: string;
-  sortAscending?: 'asc' | 'dec' | undefined;
+  sortAscending?: SortingOptions;
 }
-
-export type SearchQueryParamsType = {
-  sortOrder: SortingOptions;
-  query: string;
-  gender: string;
-  ageRange: string;
-};
 
 const PatientContext = createContext<PatientContextType | undefined>(undefined);
 
 const PatientContextProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
+  const [hasFilter, setHasFilter] = useState<boolean>(false);
+  const [query, setQuery] = useState<string>('');
   const [patients, setPatients] = useState<PatientProps[] | []>([]);
   const [deletedPatients, setDeletedPatients] = useState<number[] | []>([]);
   const [queryParams, setQueryParams] =
-    useState<SearchQueryParamsType>(initialStateQuery);
+    useState<SearchPatientProps>(initialStateQuery);
 
   useEffect(() => {
     setPatients(PatientList as PatientProps[]);
   }, []);
+
+  useEffect(() => {
+    searchThroughPatients();
+    currentParamState();
+  }, [queryParams, query]);
 
   const fetchPatientById = (patient_id: number) => {
     return PatientById(PatientList as PatientProps[], patient_id);
@@ -68,20 +73,42 @@ const PatientContextProvider: React.FC<{ children: ReactNode }> = ({
     });
   };
 
-  const searchThroughPatients = ({
-    query,
-    gender,
-    ageRange,
-    sortAscending,
-  }: SearchPatientProps) => {
+  // search 'query' debounce
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      searchThroughPatients();
+    }, 5000);
+    return () => clearTimeout(timeoutId);
+  }, [query]);
+
+  const searchThroughPatients = () => {
+    const { sortAscending, gender, ageRange } = queryParams;
+    console.log(sortAscending, query, gender, ageRange);
     const response = PatientSearchAlgo({
       patients: PatientList as PatientProps[],
+      sortAscending,
       query,
       gender,
       ageRange,
-      sortAscending,
     });
     setPatients([...response]);
+  };
+
+  // reset all seach filters
+  const resetSearchFilters = () => {
+    setQueryParams(initialStateQuery);
+    setQuery("")
+  };
+
+  // reset state
+  const currentParamState = () => {
+    const { sortAscending, gender, ageRange } = queryParams;
+    const decision =
+      query?.length == 0 &&
+      sortAscending == undefined &&
+      !gender?.length &&
+      !ageRange?.length;
+    setHasFilter(decision);
   };
 
   const value: PatientContextType = {
@@ -93,6 +120,10 @@ const PatientContextProvider: React.FC<{ children: ReactNode }> = ({
     setQueryParams,
     deletedPatients,
     deletePatientById,
+    resetSearchFilters,
+    hasFilter,
+    query,
+    setQuery,
   };
 
   return (
@@ -104,5 +135,9 @@ export default PatientContextProvider;
 
 // Custom hook to use the context
 export const usePatientContext = () => {
-  return useContext(PatientContext);
+  const ctx = useContext(PatientContext);
+  if (!ctx) {
+    throw new Error('Something wrnt wring');
+  }
+  return ctx;
 };
