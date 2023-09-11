@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import Image from 'next/image';
-import Icons from '@/assets';
+import Icons from '../assets';
 import Heading from './Heading';
 import { OptionalString } from '@/types/common';
 

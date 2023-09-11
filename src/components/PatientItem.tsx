@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Heading from './Heading';
 import Image from 'next/image';
-import Icons from '@/assets';
+import Icons from '../assets';
 import Link from 'next/link';
 import ImageContainer from './ImageContainer';
 
@@ -27,7 +27,7 @@ const PatientItem: FC<PatientItemProps> = ({
         />
       </div>
 
-      <Link href={`/patients/details/${patient_id}`}>
+      <Link href={`/patients/${patient_id}`}>
         <ImageContainer
           src={Icons.link}
           height={20}

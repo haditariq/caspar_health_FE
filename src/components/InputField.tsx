@@ -1,4 +1,4 @@
-import Icons from '@/assets';
+import Icons from '../assets';
 import Image from 'next/image';
 import React, { ChangeEvent, FC, ReactNode } from 'react';
 

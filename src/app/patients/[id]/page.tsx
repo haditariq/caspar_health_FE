@@ -6,17 +6,19 @@ import Heading from '@/components/Heading';
 import ImageContainer from '@/components/ImageContainer';
 import ModalPopup from '@/components/ModalPopup';
 import { usePatientContext } from '@/store/PatientContext';
-import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 import { useRouter } from 'next/navigation';
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
+import { useParams } from 'next/navigation';
 
-const Page: FC<Params> = ({ params }) => {
-  const { id } = params;
+const Page = () => {
+  const params = useParams();
+  const id = params?.id as string;
+
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [deleteModalShow, setDeleteModalShow] = useState<boolean>(false);
 
-  const fetchById = usePatientContext()?.fetchPatientById(id);
+  const fetchById = usePatientContext()?.fetchPatientById(parseInt(id));
   const queryParams = usePatientContext()?.queryParams;
   const deletePatientById = usePatientContext()?.deletePatientById;
 
@@ -102,3 +104,4 @@ const Page: FC<Params> = ({ params }) => {
 };
 
 export default Page;
+

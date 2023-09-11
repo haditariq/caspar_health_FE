@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Heading from './Heading';
 import Button from './Button';
-import Icons from '@/assets';
+import Icons from '../assets';
 import Image from 'next/image';
 import ImageContainer from './ImageContainer';
 

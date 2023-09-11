@@ -22,7 +22,7 @@ const PatientSearchAlgo = ({ patients, query, gender, ageRange, sortAscending }:
 }
 
 export const PatientById = (patientList: PatientProps[], id: number): PatientProps => {
-  const found = patientList.filter((item: PatientProps) => item?.patient_id == parseInt(id))
+  const found = patientList.filter((item: PatientProps) => item?.patient_id == id)
   return found[0] as PatientProps
 }
 

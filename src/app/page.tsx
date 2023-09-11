@@ -29,8 +29,6 @@ export default function Home() {
         bgcolor='bg-primary'
         extraStyle='rounded-md w-72 item-center justify-center py-4 mt-5'
         loading={loading}
-        loaderSize={'20'}
-        loaderColor={'#fff'}
         textColor='text-white'
         textSize='text-xl'
       />

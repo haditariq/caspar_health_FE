@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import SelectOptionList from './SelectOptionList';
 import AdvanceSearchLists from '../data/advanceSearchlists.json';
 import Image from 'next/image';
-import Icons from '@/assets';
+import Icons from '../assets';
 import { SortingOptions } from '@/types/common';
 
 type AdvanceSearchProps = {
