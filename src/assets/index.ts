@@ -5,6 +5,8 @@ const Icons = {
   decending: require('./icons/sort-decend.png'),
   cross: require('./icons/cross.png'),
   link: require('./icons/link.png'),
+  alert: require('./icons/black_alert.png')
 }
+
 
 export default Icons;
