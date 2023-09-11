@@ -77,7 +77,7 @@ const PatientContextProvider: React.FC<{ children: ReactNode }> = ({
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       searchThroughPatients();
-    }, 5000);
+    }, 500);
     return () => clearTimeout(timeoutId);
   }, [query]);
 
