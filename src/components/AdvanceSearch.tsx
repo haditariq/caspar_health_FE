@@ -1,9 +1,9 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import SelectOptionList from './SelectOptionList';
 import AdvanceSearchLists from '../data/advanceSearchlists.json';
 import Image from 'next/image';
 import Icons from '@/assets';
-import { OptionalString, SortingOptions } from '@/types/common';
+import { SortingOptions } from '@/types/common';
 
 type AdvanceSearchProps = {
   sortAscending: SortingOptions;

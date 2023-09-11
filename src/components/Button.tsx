@@ -1,9 +1,6 @@
 import React, { FC } from 'react';
-import { RotatingLines } from 'react-loader-spinner';
 import Heading from './Heading';
 import Spinner from './Spinner';
-
-type loadSizeProps = string | undefined;
 
 type ButtonProps = {
   text: string;

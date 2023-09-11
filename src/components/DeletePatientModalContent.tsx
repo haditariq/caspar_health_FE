@@ -11,6 +11,7 @@ type DeletePatientModalContentProps = {
   loading1: boolean;
   loading2: boolean;
 };
+
 const DeletePatientModalContent: FC<DeletePatientModalContentProps> = ({
   title,
   option1,
@@ -21,29 +22,18 @@ const DeletePatientModalContent: FC<DeletePatientModalContentProps> = ({
   loading2,
 }) => {
   return (
-    <div className='border-2 border-light_grey rounded-md'>
-      <button
-        type='button'
-        className='absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white'
-        data-modal-hide='popup-modal'
-      >
-        <svg
-          className='w-3 h-3'
-          aria-hidden='true'
-          xmlns='http://www.w3.org/2000/svg'
-          fill='none'
-          viewBox='0 0 14 14'
-        >
-          <path
-            stroke='currentColor'
-            stroke-linecap='round'
-            stroke-linejoin='round'
-            stroke-width='2'
-            d='m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6'
-          />
-        </svg>
-        <span className='sr-only'>Close modal</span>
-      </button>
+    <div className='border-2 border-light_grey rounded-md p-2'>
+      <div className='w-full flex justify-end'>
+        <Button
+          text='Close'
+          textColor='text-blac'
+          textSize='lg'
+          onClick={onClickOption2}
+          bgcolor='bg-white'
+          extraStyle='p-2 w-20'
+        />
+      </div>
+
       <div className='p-6 text-center'>
         <svg
           className='mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200'
