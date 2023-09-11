@@ -10,6 +10,7 @@ import PatientItem from '@/components/PatientItem';
 import Heading from '@/components/Heading';
 import {
   SearchQueryParamsType,
+  initialStateQuery,
   usePatientContext,
 } from '@/store/PatientContext';
 import { PatientProps } from '@/types/Patient';
@@ -49,6 +50,7 @@ const Page = () => {
     setGender('');
     setAgeRange('');
     setSortAscending(undefined);
+    if (setQueryParams) setQueryParams(initialStateQuery);
   };
 
   // search 'query' debounce

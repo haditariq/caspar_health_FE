@@ -1,5 +1,6 @@
 'use client';
 import Button from '@/components/Button';
+import DeletePatientModalContent from '@/components/DeletePatientModalContent';
 import Header from '@/components/Header';
 import Heading from '@/components/Heading';
 import ImageContainer from '@/components/ImageContainer';
@@ -12,6 +13,7 @@ const Page: FC<any> = ({ params }) => {
   const { id } = params;
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
+  const [deleteModalShow, setDeleteModalShow] = useState<boolean>(false);
 
   const fetchById = usePatientContext()?.fetchPatientById(id);
   const queryParams = usePatientContext()?.queryParams;
@@ -22,6 +24,7 @@ const Page: FC<any> = ({ params }) => {
     setTimeout(() => {
       if (deletePatientById) deletePatientById(parseInt(id));
       setLoading(false);
+      setDeleteModalShow(false);
     }, 2000);
   };
 
@@ -71,15 +74,31 @@ const Page: FC<any> = ({ params }) => {
 
         <Button
           text={`Delete Patient: ${id}`}
-          onClick={deletePatient}
+          onClick={() => setDeleteModalShow(true)}
           textColor='text-white'
           textSize='md'
           bgcolor='bg-secondry'
           extraStyle='p-3 rounded-md hover:bg-warning h-12'
-          loading={loading}
+          loading={false}
         />
       </div>
-      <ModalPopup/>
+      {deleteModalShow && (
+        <ModalPopup containerStyle='w-2/6 m-auto left-0 right-0'>
+          <DeletePatientModalContent
+            title={`Are you sure you want to delete patient with ID: ${
+              fetchById?.patient_id
+            }, Name: ${
+              fetchById && fetchById?.first_name + fetchById?.last_name
+            }`}
+            option1={'Yes'}
+            option2={'No'}
+            onClickOption1={deletePatient}
+            onClickOption2={() => setDeleteModalShow(false)}
+            loading1={loading}
+            loading2={false}
+          />
+        </ModalPopup>
+      )}
     </div>
   );
 };

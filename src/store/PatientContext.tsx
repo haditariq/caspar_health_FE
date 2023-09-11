@@ -12,6 +12,13 @@ import { PatientProps } from '@/types/Patient';
 import PatientSearchAlgo, { PatientById } from '@/utils/patientSearching';
 import { SortingOptions } from '@/types/common';
 
+export const initialStateQuery = {
+  sortOrder: undefined,
+  query: '',
+  gender: '',
+  ageRange: '',
+}
+
 export interface PatientContextType {
   searchThroughPatients: (obj: SearchPatientProps) => void;
   fetchPatientById: (patient_id: number) => PatientProps;
@@ -44,12 +51,7 @@ const PatientContextProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [patients, setPatients] = useState<PatientProps[] | []>([]);
   const [deletedPatients, setDeletedPatients] = useState<number[] | []>([]);
-  const [queryParams, setQueryParams] = useState<SearchQueryParamsType>({
-    sortOrder: undefined,
-    query: '',
-    gender: '',
-    ageRange: '',
-  });
+  const [queryParams, setQueryParams] = useState<SearchQueryParamsType>(initialStateQuery);
 
   useEffect(() => {
     setPatients(PatientList as PatientProps[]);
