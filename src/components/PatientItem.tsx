@@ -17,14 +17,7 @@ const PatientItem: FC<PatientItemProps> = ({
   lastName,
 }) => {
   return (
-    <div className='p-4 flex-1 flex w-full items-center border-b-2 border-light_border'>
-      {/* <ImageContainer
-        height={20}
-        width={20}
-        src={avatar}
-        alt='avatar'
-        extraStyle='object-fill h-20 w-20 rounded-full mx-5'
-      /> */}
+    <div className='p-4 flex-1 flex w-full items-center border-b-2 border-light_grey'>
 
       <div className=' flex-1'>
         <Heading
@@ -32,9 +25,6 @@ const PatientItem: FC<PatientItemProps> = ({
           extraStyle='font-semibold'
           size='text-md'
         />
-        {/* <Heading text={`Email: ${email}`} size='text-sm' />
-        <Heading text={`Gender: ${gender}`} size='text-sm' />
-        <Heading text={`Age: ${age}`} size='text-sm' /> */}
       </div>
 
       <Link href={`/patients/details/${patient_id}`}>

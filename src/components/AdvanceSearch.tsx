@@ -46,7 +46,7 @@ const AdvanceSearch: FC<AdvanceSearchProps> = ({
             </div>
           )}
           <button
-            className={`w-28 flex items-center justify-center rounded-md border-2 border-light_border ${
+            className={`w-28 flex items-center justify-center rounded-md border-2 border-light_grey ${
               sortAscending == 'asc' && 'border-primary'
             }
             ${sortAscending == 'dec' && 'border-primary'}

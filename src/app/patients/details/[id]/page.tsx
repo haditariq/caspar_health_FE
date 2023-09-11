@@ -6,10 +6,11 @@ import Heading from '@/components/Heading';
 import ImageContainer from '@/components/ImageContainer';
 import ModalPopup from '@/components/ModalPopup';
 import { usePatientContext } from '@/store/PatientContext';
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 import { useRouter } from 'next/navigation';
 import React, { FC, useState } from 'react';
 
-const Page: FC<any> = ({ params }) => {
+const Page: FC<Params> = ({ params }) => {
   const { id } = params;
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);

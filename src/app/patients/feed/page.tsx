@@ -101,7 +101,7 @@ const Page = () => {
           placeholder={'Quick search...'}
           onChange={(e) => setQuery(e.target.value)}
           value={query}
-          extraStyle={`border-2 border-light_border rounded-md w-full mb-0.5 text-sm`}
+          extraStyle={`border-2 border-light_grey rounded-md w-full mb-0.5 text-sm`}
         >
           <div className='flex items-center'>
             <Button
@@ -130,25 +130,21 @@ const Page = () => {
           <Heading
             text={`Results found`}
             size='text-sm'
-            color='light_border'
             extraStyle='mx-1'
           />
           <Heading
             text={`${patients?.length}`}
             size='text-sm'
-            color='light_border'
             extraStyle='font-medium'
           />
           <Heading
             text={`of`}
             size='text-sm'
-            color='light_border'
             extraStyle='mx-1'
           />
           <Heading
             text={`${patientsSize}`}
             size='text-sm'
-            color='light_border'
             extraStyle='font-medium'
           />
         </div>
@@ -160,10 +156,6 @@ const Page = () => {
           const {
             first_name,
             last_name,
-            email,
-            gender,
-            age,
-            avatar,
             patient_id,
           } = item;
           if (deletedPatients?.indexOf(patient_id) != -1) return null;

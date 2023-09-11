@@ -21,7 +21,7 @@ const DeletePatientModalContent: FC<DeletePatientModalContentProps> = ({
   loading2,
 }) => {
   return (
-    <div className='border-2 border-light_border rounded-md'>
+    <div className='border-2 border-light_grey rounded-md'>
       <button
         type='button'
         className='absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white'
@@ -81,7 +81,7 @@ const DeletePatientModalContent: FC<DeletePatientModalContentProps> = ({
             onClick={onClickOption2}
             bgcolor='bg-white'
             textSize='text-md'
-            extraStyle='px-2 py-2 w-1/4 rounded-md border-2 border-light_border'
+            extraStyle='px-2 py-2 w-1/4 rounded-md border-2 border-light_grey'
             loading={loading2}
           />
         </div>
