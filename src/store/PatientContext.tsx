@@ -71,7 +71,7 @@ const PatientContextProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const deletePatientById = (e: number) => {
-    setDeletedPatients((prevDeletedPatient) => {
+    setDeletedPatients((prevDeletedPatient: number[]) => {
       return [...prevDeletedPatient, e];
     });
   };
@@ -86,7 +86,6 @@ const PatientContextProvider: React.FC<{ children: ReactNode }> = ({
 
   const searchThroughPatients = () => {
     const { sortAscending, gender, ageRange } = queryParams;
-    console.log(sortAscending, query, gender, ageRange);
     const response = PatientSearchAlgo({
       patients: PatientList as PatientProps[],
       sortAscending,
