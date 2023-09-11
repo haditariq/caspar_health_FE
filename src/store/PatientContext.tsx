@@ -60,7 +60,10 @@ const PatientContextProvider: React.FC<{ children: ReactNode }> = ({
 
   useEffect(() => {
     searchThroughPatients();
-    currentParamState();
+  }, [queryParams]);
+
+  useEffect(() => {
+    currentParamState()
   }, [queryParams, query]);
 
   const fetchPatientById = (patient_id: number) => {
