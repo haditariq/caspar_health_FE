@@ -22,13 +22,12 @@ const PatientSearchAlgo = ({ patients, query, gender, ageRange, sortAscending }:
 }
 
 export const PatientById = (patientList: PatientProps[], id: number): PatientProps => {
-  const found = patientList.filter((item: PatientProps) => item?.patient_id == id)
-  return found[0] as PatientProps
+  return patientList.filter((patient: PatientProps) => patient?.patient_id == id)[0]
 }
 
 const genderCheck = (patientGender: string, gender: string): boolean => {
   if (!gender?.length) return true;
-  return patientGender.toLowerCase() == gender ? true : false
+  return patientGender.toLowerCase() == gender
 }
 
 const ageCheck = (patientAge: number, ageRange: string) => {
@@ -37,18 +36,14 @@ const ageCheck = (patientAge: number, ageRange: string) => {
   const [min, max] = ageRange.split('-');
   if (!max) return patientAge > 45;
   else {
-    if (patientAge >= parseInt(min) && patientAge <= parseInt(max)) return true
+    return patientAge >= parseInt(min) && patientAge <= parseInt(max)
   }
-  return false
 }
 
 const queryMatching = (item: PatientProps, query: string): boolean => {
   const { patient_id, first_name, last_name, email } = item
   const regex = new RegExp(query, 'i');
-  if (regex.test(patient_id.toString()) || regex.test(first_name) || regex.test(last_name) || regex.test(email)) {
-    return true;
-  }
-  return false
+  return regex.test(patient_id.toString()) || regex.test(first_name) || regex.test(last_name) || regex.test(email)
 }
 
 const sortFormation = (data: PatientProps[], isAccending: string): PatientProps[] => {

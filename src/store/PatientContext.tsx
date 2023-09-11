@@ -17,7 +17,7 @@ export const initialStateQuery = {
   query: '',
   gender: '',
   ageRange: '',
-}
+};
 
 export interface PatientContextType {
   searchThroughPatients: (obj: SearchPatientProps) => void;
@@ -51,7 +51,8 @@ const PatientContextProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [patients, setPatients] = useState<PatientProps[] | []>([]);
   const [deletedPatients, setDeletedPatients] = useState<number[] | []>([]);
-  const [queryParams, setQueryParams] = useState<SearchQueryParamsType>(initialStateQuery);
+  const [queryParams, setQueryParams] =
+    useState<SearchQueryParamsType>(initialStateQuery);
 
   useEffect(() => {
     setPatients(PatientList as PatientProps[]);
@@ -62,8 +63,9 @@ const PatientContextProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const deletePatientById = (e: number) => {
-    const list = [...deletedPatients];
-    setDeletedPatients([...list, e]);
+    setDeletedPatients((prevDeletedPatient) => {
+      return [...prevDeletedPatient, e];
+    });
   };
 
   const searchThroughPatients = ({
